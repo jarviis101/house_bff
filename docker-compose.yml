@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    container_name: ${NODE_ENV}_house_bff_app
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app
+    networks:
+      - house_bff
+
+  mongodb:
+    image: mongo:5.0
+    container_name: ${NODE_ENV}_house_bff_mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+    volumes:
+      - mongodb:/data/db
+      - ./docker/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - house_bff
+
+volumes:
+  mongodb:
+
+networks:
+  house_bff:
+    driver: bridge
+  house:
+    external: true
