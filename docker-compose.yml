@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: docker/node/Dockerfile
     container_name: ${NODE_ENV}_house_bff_app
+    depends_on:
+      - mongodb
     env_file:
       - .env
     volumes:

@@ -1,10 +1,11 @@
-import { GoogleServiceInterface } from './service/google.service.interface';
 import { Controller, Get, Inject, Req, UseGuards } from '@nestjs/common';
 import { GoogleOauthGuard } from './guard/google-oauth.guard';
+import { AuthServiceInterface } from '@/auth/service/auth.service.interface';
+import { LoginResponseModel } from '@/auth/model/login-response.model';
 
-@Controller('google')
+@Controller('auth/google')
 export class GoogleController {
-    constructor(@Inject('GoogleInterface') private readonly googleService: GoogleServiceInterface) {}
+    constructor(@Inject('AuthService') private readonly authService: AuthServiceInterface) {}
 
     @Get()
     @UseGuards(GoogleOauthGuard)
@@ -12,7 +13,7 @@ export class GoogleController {
 
     @Get('redirect')
     @UseGuards(GoogleOauthGuard)
-    async googleAuthRedirect(@Req() req) {
-        console.log(req.user);
+    async googleAuthRedirect(@Req() req): Promise<LoginResponseModel> {
+        return this.authService.authorize(req.user);
     }
 }

@@ -9,7 +9,7 @@ import { User } from '@/schemas/user.schema';
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     constructor(
         private readonly configService: ConfigService,
-        @Inject('GoogleInterface') private readonly googleService: GoogleServiceInterface,
+        @Inject('GoogleService') private readonly googleService: GoogleServiceInterface,
     ) {
         super({
             clientID: configService.get<string>('GOOGLE_CLIENT_ID'),
