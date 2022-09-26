@@ -1,5 +1,5 @@
 import { Controller, Get, Inject, Req, UseGuards } from '@nestjs/common';
-import { GoogleOauthGuard } from './guard/google-oauth.guard';
+import { GoogleOauthGuard } from './google-oauth.guard';
 import { AuthServiceInterface } from '@/auth/service/auth.service.interface';
 import { LoginResponseModel } from '@/auth/model/login-response.model';
 
