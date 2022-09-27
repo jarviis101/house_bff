@@ -3,15 +3,14 @@ import { Strategy } from 'passport-local';
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { AuthServiceInterface } from '@/auth/service/auth.service.interface';
 import { User } from '@/schemas/user.schema';
-import { UserProvider } from '@/user/provider/user.provider';
 import { HashService } from '@/auth/service/hash.service';
-import { use } from 'passport';
+import { UserProviderInterface } from '@/user/provider/user.provider.interface';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(
         @Inject('AuthService') private readonly authService: AuthServiceInterface,
-        private readonly userProvider: UserProvider,
+        @Inject('UserProvider') private readonly userProvider: UserProviderInterface,
         private readonly hashService: HashService,
     ) {
         super({

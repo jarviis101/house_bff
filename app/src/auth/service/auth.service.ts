@@ -4,19 +4,19 @@ import { AuthServiceInterface } from '@/auth/service/auth.service.interface';
 import { User } from '@/schemas/user.schema';
 import { UserServiceInterface } from '@/user/service/user.service.interface';
 import { CreateUserDTO } from '@/auth/dto/create-user.dto';
-import { UserProvider } from '@/user/provider/user.provider';
 import { UserAlreadyExistException } from '@/user/exception/user-already-exist.exception';
 import { HashService } from '@/auth/service/hash.service';
 import { AuthorizedDTO } from '@/auth/dto/authorized.dto';
 import { JwtPayloadType } from '@/auth/type/jwt-payload.type';
+import { UserProviderInterface } from '@/user/provider/user.provider.interface';
 
 @Injectable()
 export class AuthService implements AuthServiceInterface {
     constructor(
-        private readonly jwtService: JwtService,
         @Inject('UserService') private readonly userService: UserServiceInterface,
-        private readonly userProvider: UserProvider,
+        @Inject('UserProvider') private readonly userProvider: UserProviderInterface,
         private readonly hashService: HashService,
+        private readonly jwtService: JwtService,
     ) {}
     async authorize(user: User): Promise<AuthorizedDTO> {
         return new AuthorizedDTO(this.jwtService.sign({ id: user._id, email: user.email } as JwtPayloadType));

@@ -11,14 +11,20 @@ import { UserProvider } from '@/user/provider/user.provider';
             provide: 'UserService',
             useClass: UserService,
         },
-        UserProvider,
+        {
+            provide: 'UserProvider',
+            useClass: UserProvider,
+        },
     ],
     exports: [
         {
             provide: 'UserService',
             useClass: UserService,
         },
-        UserProvider,
+        {
+            provide: 'UserProvider',
+            useClass: UserProvider,
+        },
     ],
 })
 export class UserModule {}
