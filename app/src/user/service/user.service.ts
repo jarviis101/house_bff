@@ -4,7 +4,7 @@ import { User, UserDocument } from '@/schemas/user.schema';
 import { Model } from 'mongoose';
 import { UserServiceInterface } from '@/user/service/user.service.interface';
 import { CreateUserDTO } from '@/auth/dto/create-user.dto';
-import { GoogleUser } from '@/google/dto/google-user.dto';
+import { GoogleUserDTO } from '@/google/dto/google-user.dto';
 
 @Injectable()
 export class UserService implements UserServiceInterface {
@@ -14,7 +14,7 @@ export class UserService implements UserServiceInterface {
         return new this.userModel(dto).save();
     }
 
-    async createByGoogleAuth(dto: GoogleUser): Promise<User> {
+    async createByGoogleAuth(dto: GoogleUserDTO): Promise<User> {
         return new this.userModel(dto).save();
     }
 }
