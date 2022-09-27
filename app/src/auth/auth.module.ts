@@ -5,6 +5,8 @@ import { AuthService } from '@/auth/service/auth.service';
 import { AuthController } from '@/auth/auth.controller';
 import { UserModule } from '@/user/user.module';
 import { HashService } from '@/auth/service/hash.service';
+import { LocalStrategy } from '@/auth/strategy/local.strategy';
+import { JwtStrategy } from '@/auth/strategy/jwt.strategy';
 
 @Module({
     imports: [
@@ -25,6 +27,8 @@ import { HashService } from '@/auth/service/hash.service';
             useClass: AuthService,
         },
         HashService,
+        LocalStrategy,
+        JwtStrategy,
     ],
     exports: [
         {
