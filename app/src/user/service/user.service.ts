@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '@/schemas/user.schema';
 import { Model } from 'mongoose';
 import { UserServiceInterface } from '@/user/service/user.service.interface';
-import { GoogleUserModel } from '@/google/model/google-user.model';
 import { CreateUserDTO } from '@/auth/dto/create-user.dto';
+import { GoogleUser } from '@/google/dto/google-user.dto';
 
 @Injectable()
 export class UserService implements UserServiceInterface {
@@ -14,7 +14,7 @@ export class UserService implements UserServiceInterface {
         return new this.userModel(dto).save();
     }
 
-    async createByGoogleAuth(model: GoogleUserModel): Promise<User> {
-        return new this.userModel(model).save();
+    async createByGoogleAuth(dto: GoogleUser): Promise<User> {
+        return new this.userModel(dto).save();
     }
 }

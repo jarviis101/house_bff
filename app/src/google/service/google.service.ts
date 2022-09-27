@@ -4,7 +4,7 @@ import { GoogleServiceInterface } from '@/google/service/google.service.interfac
 import { User } from '@/schemas/user.schema';
 import { UserProvider } from '@/user/provider/user.provider';
 import { UserServiceInterface } from '@/user/service/user.service.interface';
-import { GoogleUserModel } from '@/google/model/google-user.model';
+import { GoogleUser } from '@/google/dto/google-user.dto';
 
 @Injectable()
 export class GoogleService implements GoogleServiceInterface {
@@ -19,6 +19,6 @@ export class GoogleService implements GoogleServiceInterface {
         if (user) {
             return user;
         }
-        return this.userService.createByGoogleAuth(new GoogleUserModel(name, email));
+        return this.userService.createByGoogleAuth(new GoogleUser(name, email));
     }
 }
